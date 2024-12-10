@@ -11,19 +11,6 @@
         <button type="submit">Send Data to Backend</button>
     </form>
     <script>
-        function PushUrl(){
-            let data = {
-                url: "https://www.youtube.com"
-            }
-            fetch("/api/shorturl",{
-                method: "POST",
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-
-        }
         function Redirect(){
             fetch("/api/shorturl/0")
             .then(response => response.json())
