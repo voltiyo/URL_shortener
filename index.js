@@ -10,7 +10,9 @@ app.use(express.urlencoded({ extended: true }));
 
 let originalUrls = []
 let shortUrls = []
-
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
 app.post("/api/shorturl",(req,res)=>{
     try{
         let url = new URL(req.body.url)
