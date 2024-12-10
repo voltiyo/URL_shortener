@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="http://localhost:9521/api/shorturl" method="POST">
+        <input name="url"/>
+        <button type="submit">Send Data to Backend</button>
+    </form>
+    <script>
+        function PushUrl(){
+            let data = {
+                url: "https://www.youtube.com"
+            }
+            fetch("http://localhost:9521/api/shorturl",{
+                method: "POST",
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+
+        }
+        function Redirect(){
+            fetch("http://localhost:9521/api/shorturl/0")
+            .then(response => response.json())
+            .then(data => window.location.href = data.url)
+        }
+    </script>
+</body>
+</html>

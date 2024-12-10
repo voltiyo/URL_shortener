@@ -1,0 +1,10 @@
+{
+    "watch": [
+        "index.js",
+        "routes"
+    ],
+    "ignore": [
+        "node_modules"
+    ],
+    "exec": "node index.js"
+}
