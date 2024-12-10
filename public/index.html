@@ -15,7 +15,7 @@
             let data = {
                 url: "https://www.youtube.com"
             }
-            fetch("http://localhost:9521/api/shorturl",{
+            fetch("/api/shorturl",{
                 method: "POST",
                 headers: {
                     "Content-Type": 'application/json'
@@ -25,7 +25,7 @@
 
         }
         function Redirect(){
-            fetch("http://localhost:9521/api/shorturl/0")
+            fetch("/api/shorturl/0")
             .then(response => response.json())
             .then(data => window.location.href = data.url)
         }
