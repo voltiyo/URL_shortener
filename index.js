@@ -17,30 +17,29 @@ app.get('/', (req, res) => {
   });
 app.post("/api/shorturl",(req,res)=>{
     try{
-        let url = new URL(req.body.url)
-        dns.lookup(url.hostname, (err, address, family) => {
-            if (err) {
-                res.send({ error: 'Invalid url' })
-            } else {
-                if (originalUrls.indexOf(url.hostname) < 0){
-                    originalUrls.push(url.hostname)
-                    shortUrls.push(originalUrls.length - 1)
-                    data = {
-                        originalUrl : url.hostname,
-                        shorturl : shortUrls[originalUrls.indexOf(url.hostname)]
-                    }
-                    res.send(data)
-                }
-                else {
-                    data = {
-                        original_url : url.hostname,
-                        short_url : shortUrls[originalUrls.indexOf(url.hostname)]
-                    }
-                    res.setHeader("Content-Type", "application/json")
-                    res.json(data)
-                }
-            };
-        });
+        let url = req.body.url
+        if (!url.includes("https://") && !url.includes("http://")){
+            return res.json({error: "invalid url"})
+        }
+        if (originalUrls.indexOf(url) < 0){
+            originalUrls.push(url)
+            shortUrls.push(originalUrls.length - 1)
+            data = {
+                original_url : url,
+                short_url : shortUrls[originalUrls.indexOf(url)]
+            }
+            res.send(data)
+        }
+        else {
+            data = {
+                original_url : url,
+                short_url : shortUrls[originalUrls.indexOf(url)]
+            }
+            res.setHeader("Content-Type", "application/json")
+            res.json(data)
+        }
+    
+    
     }
     catch(err){
         res.send({ error: 'invalid Url' })
@@ -57,7 +56,7 @@ app.get("/api/shorturl/:id",(req,res) => {
         res.send(data)
     } else{
         url = originalUrls[id]
-        res.redirect("https://" + url)
+        res.redirect(url)
     }
 })
 
