@@ -33,8 +33,8 @@ app.post("/api/shorturl",(req,res)=>{
                 }
                 else {
                     data = {
-                        originalUrl : url.hostname,
-                        shorturl : shortUrls[originalUrls.indexOf(url.hostname)]
+                        original_url : url.hostname,
+                        short_url : shortUrls[originalUrls.indexOf(url.hostname)]
                     }
                     res.setHeader("Content-Type", "application/json")
                     res.json(data)
